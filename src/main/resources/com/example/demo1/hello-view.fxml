@@ -1,16 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.demo1.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+<VBox alignment="CENTER" prefHeight="587.0" prefWidth="444.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <AnchorPane prefHeight="355.0" prefWidth="404.0">
+      <children>
+         <AnchorPane prefHeight="50.0" prefWidth="403.0" style="-fx-background-color: #FF0000;">
+            <children>
+               <Label layoutX="152.0" layoutY="16.0" prefHeight="20.0" prefWidth="116.0" text="Clipboard History" textAlignment="RIGHT" textFill="WHITE">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Label>
+            </children>
+         </AnchorPane>
+         <ListView id="clipboardlistview" layoutX="9.0" layoutY="118.0" prefHeight="186.0" prefWidth="394.0" />
+         <HBox id="copyButton" layoutX="10.0" layoutY="307.0" prefHeight="71.0" prefWidth="394.0">
+            <children>
+               <Button mnemonicParsing="false" style="-fx-background-color: #FF0000;" text="Copy" textFill="WHITE" />
+               <Button id="deleteButton" mnemonicParsing="false" style="-fx-background-color: #FF0000;" text="Delete" textFill="WHITE" />
+            </children>
+         </HBox>
+         <TextField id="searchfield" layoutX="241.0" layoutY="69.0" promptText="search here" />
+      </children>
+   </AnchorPane>
 </VBox>
