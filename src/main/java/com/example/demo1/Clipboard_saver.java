@@ -20,6 +20,7 @@ public class Clipboard_saver {
                 Thread.sleep(1000); // Check every second
             } catch (Exception e) {
                 e.printStackTrace();
+                //create gui
             }
         }
     }
