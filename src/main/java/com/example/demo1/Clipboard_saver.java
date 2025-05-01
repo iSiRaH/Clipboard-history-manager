@@ -21,6 +21,7 @@ public class Clipboard_saver {
             } catch (Exception e) {
                 e.printStackTrace();
                 //create gui
+
             }
         }
     }
