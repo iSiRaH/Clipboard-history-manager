@@ -1,30 +1,13 @@
 package com.example.demo1;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 public class HelloController {
-    @FXML
-    private Label welcomeText;
-
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
-
-    @FXML
-    protected void onClipboardButtonClick() {
-        Clipboard_saver.main(null);
-    }
-
-    @FXML
-    protected void onClipboardButtonClick2() {
-        Clipboard_saver.main(null);
-    }
-
     @FXML
     private TextField searchField;
 
@@ -36,4 +19,25 @@ public class HelloController {
 
     @FXML
     private Button deleteButton;
+
+    private ObservableList<String> clipboardItems;
+
+    @FXML
+    public void initialize() {
+        clipboardItems = FXCollections.observableArrayList();
+        clipboardListView.setItems(clipboardItems);
+
+        // Start clipboard monitoring in a new thread
+        Thread clipboardThread = new Thread(new Clipboard_saver(clipboardItems));
+        clipboardThread.setDaemon(true);
+        clipboardThread.start();
+    }
+
+    @FXML
+    protected void onDeleteButtonClick() {
+        String selectedItem = clipboardListView.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            clipboardItems.remove(selectedItem);
+        }
+    }
 }
