@@ -29,7 +29,10 @@
          <HBox layoutX="10.0" layoutY="307.0" prefHeight="71.0" prefWidth="394.0">
             <children>
                <Button fx:id="copyButton" mnemonicParsing="false" style="-fx-background-color: #FF0000;" text="Copy" textFill="WHITE" />
-               <Button fx:id="deleteButton" mnemonicParsing="false" style="-fx-background-color: #FF0000;" text="Delete" textFill="WHITE" onAction="#onDeleteButtonClick" />
+               <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteButtonClick" style="-fx-background-color: #FF0000;" text="Delete" textFill="WHITE">
+                  <HBox.margin>
+                     <Insets left="20.0" />
+                  </HBox.margin></Button>
             </children>
          </HBox>
          <TextField fx:id="searchField" layoutX="241.0" layoutY="69.0" promptText="search here" />

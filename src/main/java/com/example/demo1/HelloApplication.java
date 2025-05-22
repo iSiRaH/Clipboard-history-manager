@@ -13,10 +13,14 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 500, 500
         );
-        stage.setTitle("Hello!");
+        stage.setTitle("Clipboard-history");
         stage.setScene(scene);
         stage.show();
     }
+
+    //create database for clipboard_ saver
+
+
 
     public static void main(String[] args) {
         launch();
