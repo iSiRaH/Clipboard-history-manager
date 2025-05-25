@@ -43,8 +43,8 @@ public class HelloController {
         ClipboardDatabase clipboardDatabase = new ClipboardDatabase();
         try {
             clipboardDatabase.insertClipboarditem(str);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 

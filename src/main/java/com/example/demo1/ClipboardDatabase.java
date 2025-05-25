@@ -1,52 +1,47 @@
 package com.example.demo1;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class ClipboardDatabase {
-   private Connection connection;
-
-
+    private Connection connection;
 
     // Database connection and setup
-
-    public void connect() {
+    public Connection connectDatabase() {
         try {
             // Update the path as needed for your environment
-//
-//            String url = "jdbc:mysql:clipboard.sql";
-//            connection = java.sql.DriverManager.getConnection(url);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            //database credentials
             String url = "jdbc:mysql://localhost:3306/clipboarddatabase";
-            String username = "root"; // replace with your actual username
-            String password = ""; // replace with your actual password
+            String username = "root";
+            String password = "";
 
             connection = DriverManager.getConnection(url, username, password);
-
-
+            return connection;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 
-    public void insertClipboarditem(String currentText) throws SQLException {
-        Statement statement = null;
-        String query = null;
-        try {
-            connect();
-            statement = connection.createStatement();
-            System.out.println("Connection to SQLite has been established.");
+    public void insertClipboarditem(String currentText) {
+        PreparedStatement statement;
+        String query = "INSERT INTO  clipboarditem (content, timestamp) VALUES (? , '2025-02-12');";
 
-            query = "INSERT INTO  clipboarditem VALUES (1,"+currentText+", NULL);";
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
         try {
-            statement.executeUpdate(query);
+            connectDatabase();
+            if(connection == null){
+                System.out.println("Database connection failed.");
+                return;
+            }
+
+            statement = connection.prepareStatement(query);
+            statement.setString(1, currentText);
+            statement.executeUpdate();
+            statement.close();
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-        //Connect to the clipboard.sql database
+
     }
 }
