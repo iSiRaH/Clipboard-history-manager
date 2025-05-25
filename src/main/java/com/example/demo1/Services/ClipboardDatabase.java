@@ -1,6 +1,7 @@
-package com.example.demo1;
+package com.example.demo1.Services;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 
 public class ClipboardDatabase {
     private Connection connection;
@@ -25,7 +26,8 @@ public class ClipboardDatabase {
 
     public void insertClipboarditem(String currentText) {
         PreparedStatement statement;
-        String query = "INSERT INTO  clipboarditem (content, timestamp) VALUES (? , '2025-02-12');";
+        String query = "INSERT INTO  clipboarditem (content, timestamp) VALUES (? , ?);";
+        String timestamp = LocalDateTime.now().toString();
 
         try {
             connectDatabase();
@@ -36,6 +38,7 @@ public class ClipboardDatabase {
 
             statement = connection.prepareStatement(query);
             statement.setString(1, currentText);
+            statement.setString(2, timestamp);
             statement.executeUpdate();
             statement.close();
 
