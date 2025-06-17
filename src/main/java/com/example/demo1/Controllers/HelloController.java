@@ -1,13 +1,13 @@
-package com.example.demo1;
+package com.example.demo1.Controllers;
 
+import com.example.demo1.Clipboard_saver;
+import com.example.demo1.Services.ClipboardDatabase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-
-import java.sql.SQLException;
 
 public class HelloController {
     @FXML
@@ -30,9 +30,9 @@ public class HelloController {
         clipboardListView.setItems(clipboardItems);
 
         // Start clipboard monitoring in a new thread
-//        Thread clipboardThread = new Thread(new Clipboard_saver(clipboardItems));
-//        clipboardThread.setDaemon(true);
-//        clipboardThread.start();
+        Thread clipboardThread = new Thread(new Clipboard_saver(clipboardItems));
+        clipboardThread.setDaemon(true);
+        clipboardThread.start();
 
         copyButton.setOnAction(event -> onInsert());
 
@@ -43,8 +43,8 @@ public class HelloController {
         ClipboardDatabase clipboardDatabase = new ClipboardDatabase();
         try {
             clipboardDatabase.insertClipboarditem(str);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
